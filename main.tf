@@ -14,23 +14,6 @@ locals {
   }
 }
 
-resource "openstack_images_image_v2" "debian-10-20201023" {
-  for_each = toset(var.architectures)
-
-  region           = var.region
-
-  name             = "Debian 10.6.1 (${each.value}) [2020-10-23]"
-  visibility       = "public"
-  image_source_url = "https://cloudfront.debian.net/cdimage/openstack/10.6.1-20201023/debian-10.6.1-20201023-openstack-${local.arch_map[each.key]}.qcow2"
-  image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
-  container_format = "bare"
-  disk_format      = "qcow2"
-
-  properties = {
-    architecture = each.value
-  }
-}
-
 resource "openstack_images_image_v2" "centos-7-20200422" {
   for_each = toset(var.architectures)
 
@@ -56,6 +39,23 @@ resource "openstack_images_image_v2" "centos-8-20200611" {
   name             = "CentOS 8.2 (${each.value}) [2020-06-11]"
   visibility       = "public"
   image_source_url = "https://cloud.centos.org/centos/8/${each.value}/images/CentOS-8-GenericCloud-8.2.2004-20200611.2.${each.value}.qcow2"
+  image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
+  container_format = "bare"
+  disk_format      = "qcow2"
+
+  properties = {
+    architecture = each.value
+  }
+}
+
+resource "openstack_images_image_v2" "debian-10-20201023" {
+  for_each = toset(var.architectures)
+
+  region           = var.region
+
+  name             = "Debian 10.6.1 (${each.value}) [2020-10-23]"
+  visibility       = "public"
+  image_source_url = "https://cloudfront.debian.net/cdimage/openstack/10.6.1-20201023/debian-10.6.1-20201023-openstack-${local.arch_map[each.key]}.qcow2"
   image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
   container_format = "bare"
   disk_format      = "qcow2"
