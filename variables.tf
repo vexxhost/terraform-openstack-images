@@ -4,6 +4,6 @@ variable "region" {
 }
 
 variable "architectures" {
-  type = list
-  name = "List of supported architectures by cloud"
+  type        = list
+  description = "List of supported architectures by cloud"
 }
