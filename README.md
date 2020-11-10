@@ -15,8 +15,8 @@ and once it is approved and merged, the image should appear in our clouds.
 Basic usage of this module is as follows:
 
 ```hcl
-module "gcloud" {
-  source  = "vexxhost/openstack-images"
+module "openstack-images" {
+  source  = "vexxhost/images/openstack"
   version = "~> 1.0"
 
   region        = "yul1"
