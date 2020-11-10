@@ -14,7 +14,7 @@ locals {
   }
 }
 
-resource "openstack_images_image_v2" "debian-10-2021023" {
+resource "openstack_images_image_v2" "debian-10-20201023" {
   for_each = toset(var.architectures)
 
   region           = var.region
