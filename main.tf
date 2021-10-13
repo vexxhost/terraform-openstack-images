@@ -101,6 +101,23 @@ resource "openstack_images_image_v2" "ubuntu-bionic-20201031" {
   }
 }
 
+resource "openstack_images_image_v2" "ubuntu-bionic-20210928" {
+  for_each = toset(var.architectures)
+
+  region           = var.region
+
+  name             = "Ubuntu 18.04.6 LTS (${each.value}) [2021-09-28]"
+  visibility       = "public"
+  image_source_url = "https://cloud-images.ubuntu.com/releases/bionic/release-20210928/ubuntu-18.04-server-cloudimg-${local.arch_map[each.key]}.img"
+  image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
+  container_format = "bare"
+  disk_format      = "qcow2"
+
+  properties = {
+    architecture = each.value
+  }
+}
+
 resource "openstack_images_image_v2" "ubuntu-focal-20201102" {
   for_each = toset(var.architectures)
 
@@ -109,6 +126,23 @@ resource "openstack_images_image_v2" "ubuntu-focal-20201102" {
   name             = "Ubuntu 20.04.1 LTS (${each.value}) [2020-11-02]"
   visibility       = "public"
   image_source_url = "https://cloud-images.ubuntu.com/releases/focal/release-20201102/ubuntu-20.04-server-cloudimg-${local.arch_map[each.key]}.img"
+  image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
+  container_format = "bare"
+  disk_format      = "qcow2"
+
+  properties = {
+    architecture = each.value
+  }
+}
+
+resource "openstack_images_image_v2" "ubuntu-focal-20211004" {
+  for_each = toset(var.architectures)
+
+  region           = var.region
+
+  name             = "Ubuntu 20.04.3 LTS (${each.value}) [2021-10-04]"
+  visibility       = "public"
+  image_source_url = "https://cloud-images.ubuntu.com/releases/focal/release-20211004/ubuntu-20.04-server-cloudimg-${local.arch_map[each.key]}.img"
   image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
   container_format = "bare"
   disk_format      = "qcow2"
