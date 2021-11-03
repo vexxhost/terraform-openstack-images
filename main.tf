@@ -81,6 +81,23 @@ resource "openstack_images_image_v2" "fedora-34-20210427" {
   }
 }
 
+resource "openstack_images_image_v2" "fedora-35-20211102" {
+  for_each = toset(var.architectures)
+
+  region           = var.region
+
+  name             = "Fedora 35 (${each.value}) [2021-11-02]"
+  visibility       = "public"
+  image_source_url = "https://mirrors.kernel.org/fedora/releases/34/Cloud/${each.value}/images/Fedora-Cloud-Base-35-1.2.${each.value}.qcow2"
+  image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
+  container_format = "bare"
+  disk_format      = "qcow2"
+
+  properties = {
+    architecture = each.value
+  }
+}
+
 resource "openstack_images_image_v2" "opensuse-leap-15-20191021" {
   # NOTE(mnaser): OpenSUSE only publishes 15.2 for x86_64
   for_each = toset([
