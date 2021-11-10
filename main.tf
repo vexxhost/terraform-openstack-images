@@ -88,7 +88,7 @@ resource "openstack_images_image_v2" "fedora-35-20211102" {
 
   name             = "Fedora 35 (${each.value}) [2021-11-02]"
   visibility       = "public"
-  image_source_url = "https://mirrors.kernel.org/fedora/releases/34/Cloud/${each.value}/images/Fedora-Cloud-Base-35-1.2.${each.value}.qcow2"
+  image_source_url = "https://mirrors.kernel.org/fedora/releases/35/Cloud/${each.value}/images/Fedora-Cloud-Base-35-1.2.${each.value}.qcow2"
   image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
   container_format = "bare"
   disk_format      = "qcow2"
