@@ -81,12 +81,12 @@ resource "openstack_images_image_v2" "fedora-34-20210427" {
   }
 }
 
-resource "openstack_images_image_v2" "fedora-35-20211102" {
+resource "openstack_images_image_v2" "fedora-35-20211119" {
   for_each = toset(var.architectures)
 
   region           = var.region
 
-  name             = "Fedora 35 (${each.value}) [2021-11-02]"
+  name             = "Fedora 35 (${each.value}) [2021-11-19]"
   visibility       = "public"
   image_source_url = "https://mirrors.kernel.org/fedora/releases/35/Cloud/${each.value}/images/Fedora-Cloud-Base-35-1.2.${each.value}.qcow2"
   image_cache_path = "$HOME/.terraform/${var.region}-image-cache"
